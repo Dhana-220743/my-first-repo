@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			FORMS
+		</title>
+	</head>
+		<body  >
+			<div style="background-color: lightpink;width:500px;height:700px;margin:auto;">
+				<h1 align="center">FORM</h1>
+			
+			<form action="/jk.php" target="_self" method="get">
+				<center><label for="name">Enter your name : </label><input type="text" id="name" name="k" placeholder="Enter your name" maxlength="6" required
+				></center><br>
+				<center><label>Enter password : </label><input type="password"name="p" placeholder="Enter password" title="Enter only alphabets"></center><br>
+				WT<input type="checkbox" name="c1">
+				DBMS<input type="checkbox" name="c2" checked>
+				JAVA<input type="checkbox" name="c3"><br>
+				<fieldset>
+					<legend align="center">BRANCH</legend>
+				CSE<input type="radio" name="r1">
+				ECE<input type="radio" name="r1" checked>
+				EEE<input type="radio" name="r1">
+			</fieldset><br>
+				<input type="hidden" name="h" value="cse"><br>
+				<input type="file" name="f" accept="image/*" multiple><br>
+				<center>Email : <input type="email" placeholder="Enter your email"></center><br>
+				<center>Date : <input type="date"></center><br>
+				<center>Color : <input type="color"></center><br>
+				<center>Enter range :<input type="range" name="r"></center><br>
+				<select name="drop" multiple>
+					<optgroup label="Cities">
+					<option>Newyork</option>
+					<option>USA</option>
+					<option>London</option>
+					<option>Paris</option>
+				</optgroup>
+				<optgroup label="Branch">
+					<option>CSE</option>
+					<option>ECE</option>
+					<option>EEE</option>
+					<option>MME</option>
+				</optgroup>
+				</select>
+				Address : <textarea rows="5">
+
+				</textarea>
+				<center><input type="reset" value="clear"><br>
+				<center><input type="submit" name="s"></center>
+			</div>
+		</body>
+	
+</html>
