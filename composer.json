@@ -1,0 +1,12 @@
+{
+    "name": "dhanalakshmi/student-support",
+    "authors": [
+        {
+            "name": "Dhana",
+            "email": "n220743@college.edu"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "^5.26"
+    }
+}

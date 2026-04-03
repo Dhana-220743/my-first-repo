@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+         <style>
+
+    body {
+      height: 100vh;
+      display: flex;
+      font-family: 'poppins',sans-serif;
+      justify-content: center;
+      align-items: center;
+      background:linear-gradient(135deg,#1e3c72,#2a5298);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+      font-size:15px;
+      pointer-events: none;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 35px;
+      border-radius: 20px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    .subtitle{
+        font-size:14px;
+        opacity:0.8;
+        margin-bottom:25px;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    #user {
+      margin: 15px 0;
+      font-size: 16px;
+      color: #444;
+      min-height: 40px;
+    }
+
+    button {
+      width: 80%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn {
+      background:linear-gradient(45deg,#4285F4,#34A853);
+      color: white;
+    }
+
+    .login-btn:hover {
+      background: #2f66d0;
+      transform: scale(1.05);
+    }
+
+    .logout-btn {
+      background: linear-gradient(45deg,#ff416c,#ff4b2b);;
+      color: white;
+    }
+
+    .logout-btn:hover {
+      background: #c0392b;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+<h1>Student Support</h1>
+<p class="subtitle">Welcome! Login to continue</p>
+
+<button onclick="login()" class="login-btn">Login with Google</button>
+<button onclick="login()" class="login-btn">Login with Github</button>
+<button onclick="logout()" class="logout-btn">Logout</button>
+<h2 id="user"></h2>
+</div>
+<div class="watermark">Dhana &copy 2026</div>
+
+<script type="module">
+ // Import the functions you need from the SDKs you need
+//import { initializeApp } from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider ,signOut,GithubAuthProvider} 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCS7uQ2gAHGjGNNsZXdpJQ5ZVCxB4XLz6c",
+  authDomain: "student-support-14c76.firebaseapp.com",
+  projectId: "student-support-14c76",
+  storageBucket: "student-support-14c76.firebasestorage.app",
+  messagingSenderId: "789373006162",
+  appId: "1:789373006162:web:ee3eb3b0074fa0f1510a8b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+  const provider = new GoogleAuthProvider();
+const providerName = "Google";
+  window.login = function() {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      
+      document.getElementById("user").innerText =
+    
+      result.user.getIdToken().then(token => {
+
+        fetch("verify.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ idToken: token })
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("Backend Response:", data);
+
+          // Update UI using backend response
+          document.getElementById("user").innerText =
+          providerName + "Login\n"+
+            " Verified User\n" +
+            data.name + "\n" + data.email;
+        });
+
+      });
+
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+window.githubLogin = function() {
+
+  const githubProvider = new GithubAuthProvider();
+
+  signInWithPopup(auth, githubProvider)
+    .then((result) => {
+    const providerName = "GitHub";
+      document.getElementById("user").innerText =
+        providerName + "Login\n"+
+          result.user.displayName + "\n" + result.user.email;
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+  window.logout = function() {
+    signOut(auth);
+    document.getElementById("user").innerText = "Logged out";
+  };
+</script>
+
+</body>
+</html>
