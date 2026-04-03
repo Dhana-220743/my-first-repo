@@ -1,0 +1,47 @@
+<!DOCTYPe html>
+<html>
+    <head><title>Table 2</title>
+    <style>
+        .tbl {
+            border:1px solid rgba(0, 0, 0, 0.472);
+        }
+        .bdy {
+            background-color: chartreuse;
+        }
+        .hd{
+            background-color: hotpink;
+            text-decoration: underline;
+        }
+        table {
+            border-radius:10px;
+        }
+        .container {
+            margin:200px auto 100px;
+        }
+    </style></head>
+    <body>
+        <div class="container">
+        <table border="2" class="tbl" cellspacing="5px" cellpadding="5px">
+        <thead class="hd">
+            <tr><th colspan="4">Time table</th></tr>
+        </thead>
+        <tbody class="bdy">
+            <tr>
+                <td>IOR</td>
+                <td>WT</td>
+                <td colspan="2">DSP</td>
+            </tr>
+           <tr>
+            <td rowspan="2">WT</td>
+            <td colspan="3">CD</td>
+           </tr>
+           <tr>
+            <td>COA</td>
+            <td>DSP</td>
+            <td colspan="2">CD</td>
+           </tr>
+        </tbody>
+        </table>
+        </div>
+    </body>
+</html>
